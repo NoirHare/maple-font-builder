@@ -78,6 +78,8 @@ jobs:
         path: fonts/issue.fea
     
     - if: ${{ success() }}
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         if [ ! -d "fonts/archive" ]; then
           echo "Error: Failed to build font, please check [Run custom script] step."
