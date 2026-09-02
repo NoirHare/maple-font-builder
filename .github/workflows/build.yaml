@@ -2,11 +2,12 @@ name: Build
 
 on:
   workflow_dispatch:
-    args:
-      description: 'Args for build.py'
-      required: false
-      default: ''
-      type: string
+    inputs:
+      args:
+        description: 'Args for build.py'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: write
