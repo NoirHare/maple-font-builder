@@ -77,8 +77,7 @@ jobs:
         name: issue-fea-file
         path: fonts/issue.fea
     
-    - name: Create release
-      if: ${{ success() }}
+    - if: ${{ success() }}
       run: |
         if [ ! -d "fonts/archive" ]; then
           echo "Error: Failed to build font, please check [Run custom script] step."
@@ -92,6 +91,4 @@ jobs:
         echo "\`\`\`" >> NOTES
         python build.py $BUILD_ARGS --dry | sed '1s/^/font_config: /' >> NOTES
         echo "\`\`\`" >> NOTES
-        gh release create "v$(date +%s)" fonts/archive/*.* --notes-file NOTES
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        gh release -R ${{ github.repository }} create "v$(date +%s)" fonts/archive/*.* --notes-file NOTES
